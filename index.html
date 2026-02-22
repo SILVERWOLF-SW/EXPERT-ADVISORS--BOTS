@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EA PRO - Premium Expert Advisors</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .gradient-text {
+            background: linear-gradient(to right, #4ade80, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-bg {
+            background-color: #0f172a;
+            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-white font-sans antialiased overflow-hidden" id="body-element">
+
+    <!-- Access Gate / Lock Screen -->
+    <div id="access-gate" class="fixed inset-0 z-[200] bg-slate-950 flex flex-col items-center justify-center p-4 transition-all duration-700">
+        <!-- Background Effects -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-blue-600/20 blur-[100px]"></div>
+        </div>
+
+        <div class="relative z-10 max-w-md w-full bg-slate-900/50 backdrop-blur-xl border border-slate-700 p-8 rounded-2xl shadow-2xl text-center">
+            <div class="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-800 border border-slate-700 text-blue-500 text-2xl shadow-lg shadow-blue-500/20">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            
+            <h1 class="text-3xl font-bold text-white mb-2">Private Access</h1>
+            <p class="text-slate-400 mb-8">This platform is currently available by invitation only. Please enter your access code.</p>
+
+            <form id="access-form" class="space-y-4">
+                <div>
+                    <input type="text" id="access-code" class="block w-full text-center rounded-xl border-0 bg-slate-950 py-4 px-4 text-white shadow-inner ring-1 ring-inset ring-slate-700 focus:ring-2 focus:ring-inset focus:ring-blue-500 text-lg tracking-widest placeholder:tracking-normal transition" placeholder="ENTER CODE" required autocomplete="off">
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 group">
+                    <span>Unlock Access</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </form>
+            <p id="access-error" class="text-red-500 text-sm mt-4 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Invalid access code.</p>
+        </div>
+        
+        <div class="absolute bottom-8 text-slate-600 text-xs">
+            &copy; 2023 EA PRO. Secured Access.
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-robot text-blue-500"></i>
+                        <span class="text-white">EA <span class="text-blue-500">PRO</span></span>
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Home</a>
+                        <a href="#features" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Features</a>
+                        <a href="#products" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Bots</a>
+                        <a href="#faq" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">FAQ</a>
+                    </div>
+                </div>
+                <div>
+                    <a href="#products" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition shadow-lg shadow-blue-500/30">
+                        Start Trading
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
+            <div class="inline-block mb-4 px-4 py-1 rounded-full bg-slate-800 border border-slate-700 text-blue-400 text-sm font-semibold">
+                New V3 Algorithms Released 🚀
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+                Automate Your Wealth with <br>
+                <span class="gradient-text">Intelligent Trading Bots</span>
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-400 mb-10">
+                Stop staring at charts all day. Our expert advisors trade 24/7 with proven strategies, risk management, and consistent results.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#products" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl text-lg font-bold transition shadow-xl shadow-blue-500/20 flex items-center gap-2">
+                    Browse Bots <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#features" class="bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-xl text-lg font-bold transition border border-slate-700">
+                    Learn More
+                </a>
+            </div>
+            
+            <!-- Stats -->
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-slate-800 pt-10">
+                <div>
+                    <div class="text-3xl font-bold text-white">$24M+</div>
+                    <div class="text-slate-500 text-sm">Volume Traded</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white">12,000+</div>
+                    <div class="text-slate-500 text-sm">Active Users</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white">99.9%</div>
+                    <div class="text-slate-500 text-sm">Uptime</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white">24/7</div>
+                    <div class="text-slate-500 text-sm">Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Why Choose EA PRO?</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Our bots aren't just scripts; they are sophisticated software built by veteran traders and senior engineers.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 transition duration-300">
+                    <div class="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-chart-line text-blue-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Proven Strategies</h3>
+                    <p class="text-slate-400">Backtested over 5 years of historical data and live-tested for consistent profitability in various market conditions.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 transition duration-300">
+                    <div class="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-shield-halved text-green-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Advanced Risk Management</h3>
+                    <p class="text-slate-400">Built-in equity protection, stop-loss mechanisms, and dynamic lot sizing to preserve your capital.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 transition duration-300">
+                    <div class="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-bolt text-purple-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Instant Execution</h3>
+                    <p class="text-slate-400">Optimized for low latency execution to catch market movements the millisecond they happen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-20 bg-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Expert Advisors</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Select the bot that fits your trading style and risk appetite.</p>
+            </div>
+
+            <div id="products-container" class="grid md:grid-cols-3 gap-8">
+                <!-- Products will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-slate-800 relative overflow-hidden">
+        <!-- Background elements -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
+            <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-500 blur-3xl"></div>
+            <div class="absolute top-1/2 right-0 w-64 h-64 rounded-full bg-purple-500 blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Trusted by Traders Worldwide</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Don't just take our word for it. See what our community is saying about our bots.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-slate-900/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700">
+                    <div class="flex items-center gap-1 text-yellow-500 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-300 mb-6 italic">"I was skeptical about trading bots, but Nova Scalper proved me wrong. It's been consistent for 3 months now, passing two prop firm challenges for me."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center font-bold text-white">JD</div>
+                        <div>
+                            <div class="font-bold text-white">James D.</div>
+                            <div class="text-xs text-slate-500">Funded Trader</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-slate-900/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700">
+                    <div class="flex items-center gap-1 text-yellow-500 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-300 mb-6 italic">"The support team is incredible. They helped me set up the VPS and installed the Trend Surfer bot. Woke up to $400 profit today!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center font-bold text-white">sar</div>
+                        <div>
+                            <div class="font-bold text-white">Sarah Jenkins</div>
+                            <div class="text-xs text-slate-500">Retail Trader</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-slate-900/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700">
+                    <div class="flex items-center gap-1 text-yellow-500 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <p class="text-slate-300 mb-6 italic">"The Ultimate Pack is worth every penny. Having a diversified portfolio of bots running on different pairs smooths out the equity curve perfectly."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center font-bold text-white">MK</div>
+                        <div>
+                            <div class="font-bold text-white">Michael K.</div>
+                            <div class="text-xs text-slate-500">Forex Investor</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-slate-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+             <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <details class="group bg-slate-800 p-6 rounded-xl open:ring-2 open:ring-blue-500/50 cursor-pointer border border-slate-700">
+                    <summary class="flex justify-between items-center font-medium list-none">
+                        <span>Do I need prior trading experience?</span>
+                        <span class="transition group-open:rotate-180">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <p class="text-slate-400 mt-3 text-sm">No! Our bots are fully automated. We provide a step-by-step video guide on how to install them on your MetaTrader 4/5 platform. Once set up, they run on their own.</p>
+                </details>
+
+                <details class="group bg-slate-800 p-6 rounded-xl open:ring-2 open:ring-blue-500/50 cursor-pointer border border-slate-700">
+                    <summary class="flex justify-between items-center font-medium list-none">
+                        <span>What is the minimum deposit required?</span>
+                        <span class="transition group-open:rotate-180">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <p class="text-slate-400 mt-3 text-sm">We recommend a minimum of $500 for a standard account, or $50 for a cent account to ensure proper risk management functions effectively.</p>
+                </details>
+
+                <details class="group bg-slate-800 p-6 rounded-xl open:ring-2 open:ring-blue-500/50 cursor-pointer border border-slate-700">
+                    <summary class="flex justify-between items-center font-medium list-none">
+                        <span>Is there a refund policy?</span>
+                        <span class="transition group-open:rotate-180">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <p class="text-slate-400 mt-3 text-sm">Yes, we offer a 30-day money-back guarantee if the bot does not perform as described, provided you have used the recommended settings.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Get in Touch Section -->
+    <section id="contact" class="py-20 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Get in Touch</h2>
+                    <p class="text-slate-400 mb-8">
+                        Have questions about our Expert Advisors? Need help with installation? 
+                        Fill out the form and our team will get back to you within 24 hours.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center shrink-0">
+                                <i class="fa-regular fa-envelope text-blue-500 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white mb-1">Email Support</h3>
+                                <a href="mailto:ranossilverwolf245@gmail.com" class="text-slate-400 text-sm hover:text-blue-400 transition">ranossilverwolf245@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center shrink-0">
+                                <i class="fa-brands fa-whatsapp text-green-500 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white mb-1">WhatsApp Support</h3>
+                                <a href="https://wa.me/254734716107" target="_blank" class="text-slate-400 text-sm hover:text-green-400 transition">+254 734716107</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-xl">
+                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('Message sent! We will contact you shortly.');">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-400 mb-1">First Name</label>
+                                <input type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition" placeholder="John">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-400 mb-1">Last Name</label>
+                                <input type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-400 mb-1">Email</label>
+                            <input type="email" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition" placeholder="john@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-400 mb-1">Message</label>
+                            <textarea rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none transition" placeholder="How does the Nova Scalper work?"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-blue-500/20">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <a href="#" class="text-2xl font-bold flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-robot text-blue-500"></i>
+                        <span class="text-white">EA <span class="text-blue-500">PRO</span></span>
+                    </a>
+                    <p class="text-slate-500 text-sm">Empowering traders with institutional-grade algorithms for the retail market.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Products</h4>
+                    <ul class="space-y-2 text-slate-400 text-sm">
+                        <li><a href="#" class="hover:text-blue-400">Nova Scalper</a></li>
+                        <li><a href="#" class="hover:text-blue-400">Trend Surfer</a></li>
+                        <li><a href="#" class="hover:text-blue-400">Ultimate Pack</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-slate-400 text-sm">
+                        <li><a href="#" class="hover:text-blue-400">About Us</a></li>
+                        <li><a href="#contact" class="hover:text-blue-400">Contact</a></li>
+                        <li><a href="#" class="hover:text-blue-400">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition">
+                            <i class="fa-brands fa-discord"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition">
+                            <i class="fa-brands fa-telegram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 text-center text-slate-600 text-sm">
+                <p>&copy; 2023 EA PRO. All rights reserved. Trading involves substantial risk and is not suitable for every investor.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-slate-900/90 backdrop-blur-sm transition-opacity"></div>
+
+        <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div class="relative transform overflow-hidden rounded-2xl bg-slate-800 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg border border-slate-700">
+                    
+                    <div class="px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                        <div class="flex justify-between items-center mb-5">
+                            <h3 class="text-xl font-semibold leading-6 text-white" id="modal-title">Checkout</h3>
+                            <button onclick="closeModal()" class="text-slate-400 hover:text-white">
+                                <i class="fa-solid fa-xmark text-xl"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="bg-slate-900 p-4 rounded-lg mb-6 border border-slate-700 flex justify-between items-center">
+                            <div>
+                                <p class="text-sm text-slate-400">Product</p>
+                                <p id="modal-product-name" class="font-bold text-lg">Bot Name</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm text-slate-400">Total</p>
+                                <p id="modal-price" class="font-bold text-xl text-blue-400">$0.00</p>
+                            </div>
+                        </div>
+
+                        <!-- Payment Tabs -->
+                        <div class="flex gap-2 mb-6">
+                            <button onclick="switchTab('paypal')" id="tab-paypal" class="flex-1 bg-blue-600 text-white py-2 rounded-lg text-sm font-bold transition">
+                                <i class="fa-brands fa-paypal mr-1"></i> PayPal
+                            </button>
+                            <button onclick="switchTab('crypto')" id="tab-crypto" class="flex-1 bg-slate-700 text-slate-300 py-2 rounded-lg text-sm font-bold transition hover:bg-slate-600">
+                                <i class="fa-brands fa-bitcoin mr-1"></i> Binance Pay
+                            </button>
+                        </div>
+
+                        <!-- PayPal Content -->
+                        <div id="content-paypal" class="space-y-4">
+                            <p class="text-sm text-slate-400 mb-4">Complete your purchase securely via PayPal. You will be redirected to complete the payment.</p>
+                            
+                            <!-- PayPal Button Placeholder -->
+                            <!-- USER: REPLACE THE HREF BELOW WITH YOUR PAYPAL.ME LINK OR BUTTON CODE -->
+                            <a href="https://www.paypal.com/paypalme/YOUR_USERNAME_HERE" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#0070ba] hover:bg-[#005ea6] text-white font-bold py-4 rounded-xl transition shadow-lg">
+                                <span>Pay with PayPal</span>
+                            </a>
+                            <p class="text-xs text-center text-slate-500">After payment, please send a screenshot to our WhatsApp or Email for instant activation.</p>
+                        </div>
+
+                        <!-- Crypto Content -->
+                        <div id="content-crypto" class="space-y-4 hidden">
+                            <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 text-center">
+                                <p class="text-sm text-slate-400 mb-2">Send <span class="text-white font-bold">USDT (TRC20)</span> to:</p>
+                                <div class="flex items-center justify-center gap-2 bg-slate-800 p-2 rounded border border-slate-700 mb-2">
+                                    <code class="text-xs text-blue-400 break-all">T9yD14Nj9j7xAB4dbGe1s2h2z6X8q9d7</code>
+                                    <button onclick="navigator.clipboard.writeText('T9yD14Nj9j7xAB4dbGe1s2h2z6X8q9d7'); alert('Address copied!')" class="text-slate-400 hover:text-white">
+                                        <i class="fa-regular fa-copy"></i>
+                                    </button>
+                                </div>
+                                <p class="text-xs text-slate-500">Network: TRON (TRC20)</p>
+                            </div>
+                            
+                            <a href="https://wa.me/254734716107?text=I%20have%20paid%20via%20Binance%20for..." target="_blank" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl transition shadow-lg">
+                                <i class="fa-brands fa-whatsapp"></i>
+                                <span>Confirm Payment on WhatsApp</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Access Control System ---
+        const VALID_ACCESS_CODES = ['ALGOVIP', 'BULLRUN', 'ADMIN123', 'EAPRO']; // Define your codes here
+        const accessGate = document.getElementById('access-gate');
+        const bodyElement = document.getElementById('body-element');
+        const accessForm = document.getElementById('access-form');
+        const accessInput = document.getElementById('access-code');
+        const accessError = document.getElementById('access-error');
+
+        function unlockSite() {
+            // Visual unlock
+            accessGate.classList.add('opacity-0', 'pointer-events-none');
+            bodyElement.classList.remove('overflow-hidden');
+            
+            // Persist
+            localStorage.setItem('eapro_access', 'granted');
+            
+            // Optional: Remove from DOM after transition
+            setTimeout(() => {
+                accessGate.style.display = 'none';
+            }, 700);
+        }
+
+        function checkAccess() {
+            // 1. Check LocalStorage
+            if (localStorage.getItem('eapro_access') === 'granted') {
+                unlockSite();
+                return;
+            }
+
+            // 2. Check URL Parameter (?invite=CODE)
+            const urlParams = new URLSearchParams(window.location.search);
+            const inviteCode = urlParams.get('invite');
+            
+            if (inviteCode && VALID_ACCESS_CODES.includes(inviteCode.toUpperCase())) {
+                unlockSite();
+            }
+        }
+
+        // Handle Form Submission
+        accessForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const inputCode = accessInput.value.trim().toUpperCase();
+            
+            if (VALID_ACCESS_CODES.includes(inputCode)) {
+                unlockSite();
+            } else {
+                accessError.classList.remove('hidden');
+                accessInput.classList.add('ring-red-500', 'text-red-500');
+                
+                // Shake animation effect
+                accessInput.parentElement.classList.add('animate-pulse');
+                setTimeout(() => {
+                    accessInput.parentElement.classList.remove('animate-pulse');
+                }, 500);
+            }
+        });
+
+        // Clear error on input
+        accessInput.addEventListener('input', () => {
+            accessError.classList.add('hidden');
+            accessInput.classList.remove('ring-red-500', 'text-red-500');
+        });
+
+        // Initialize
+        checkAccess();
+
+        // --- PRODUCT MANAGEMENT SYSTEM ---
+        // TO ADD A NEW BOT: Copy one of the blocks below, paste it, and change the details.
+        const products = [
+            {
+                id: 1,
+                name: "Nova Scalper",
+                pair: "EURUSD / GBPUSD",
+                icon: "fa-bolt",
+                iconColor: "text-yellow-500",
+                description: "High-frequency scalping bot designed to profit from small price changes. Best for low spread accounts.",
+                price: 199,
+                oldPrice: 299,
+                features: [
+                    "Monthly ROI: 8-15%",
+                    "Low Drawdown (< 10%)",
+                    "Auto-News Filter",
+                    "MT4 & MT5 Compatible"
+                ],
+                tag: "POPULAR",
+                tagColor: "bg-green-500"
+            },
+            {
+                id: 2,
+                name: "Trend Surfer",
+                pair: "XAUUSD (Gold)",
+                icon: "fa-water",
+                iconColor: "text-blue-500",
+                description: "Trend-following algorithm built specifically for Gold volatility. Captures massive moves.",
+                price: 249,
+                oldPrice: 399,
+                features: [
+                    "Monthly ROI: 15-30%",
+                    "Trailing Stop Loss",
+                    "Multi-Timeframe Analysis",
+                    "MT4 Only"
+                ]
+            },
+            {
+                id: 3,
+                name: "Ultimate Pack",
+                pair: "All Pairs + Indices",
+                icon: "fa-gem",
+                iconColor: "text-purple-400",
+                description: "Get access to all our bots plus exclusive VIP settings for US30 and NAS100.",
+                price: 499,
+                oldPrice: 899,
+                features: [
+                    "All 5 Premium Bots",
+                    "Lifetime Updates",
+                    "1-on-1 Installation Support",
+                    "Private Discord Access"
+                ],
+                tag: "BEST VALUE",
+                tagColor: "bg-purple-500",
+                isSpecial: true // Adds blue styling
+            },
+            
+            // --- PASTE NEW BOT BELOW THIS LINE ---
+            /* 
+            {
+                id: 4,
+                name: "NEW BOT NAME HERE",
+                pair: "EURUSD",
+                icon: "fa-robot", 
+                iconColor: "text-blue-500",
+                description: "Write a short description of what the bot does here.",
+                price: 150,
+                oldPrice: 250,
+                features: [
+                    "Feature 1",
+                    "Feature 2",
+                    "Feature 3"
+                ]
+            }
+            */
+            // --- END OF NEW BOT ---
+        ];
+
+        function renderProducts() {
+            const container = document.getElementById('products-container');
+            container.innerHTML = products.map(product => `
+                <div class="${product.isSpecial ? 'bg-gradient-to-b from-blue-900 to-slate-900 border-blue-500/50' : 'bg-slate-900 border-slate-700'} rounded-2xl overflow-hidden shadow-2xl border flex flex-col relative group">
+                    ${product.tag ? `<div class="absolute top-4 right-4 ${product.tagColor} text-white text-xs font-bold px-2 py-1 rounded">${product.tag}</div>` : ''}
+                    <div class="p-8 flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-2xl font-bold ${product.isSpecial ? 'text-white' : ''}">${product.name}</h3>
+                                <p class="${product.isSpecial ? 'text-blue-200' : 'text-blue-400'} text-sm">${product.pair}</p>
+                            </div>
+                            <i class="fa-solid ${product.icon} ${product.iconColor} text-2xl"></i>
+                        </div>
+                        <p class="${product.isSpecial ? 'text-blue-100' : 'text-slate-400'} mb-6 text-sm">${product.description}</p>
+                        
+                        <ul class="space-y-3 text-sm ${product.isSpecial ? 'text-blue-100' : 'text-slate-300'} mb-8">
+                            ${product.features.map(feature => `
+                                <li class="flex items-center gap-2">
+                                    <i class="fa-solid fa-check ${product.isSpecial ? 'text-white bg-blue-500 rounded-full p-1 text-xs' : 'text-green-500'}"></i> 
+                                    ${feature}
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    <div class="p-8 ${product.isSpecial ? 'bg-black/20 border-t border-white/10' : 'bg-slate-900 border-t border-slate-800'}">
+                        <div class="flex items-end gap-2 mb-4">
+                            <span class="text-3xl font-bold text-white">$${product.price}</span>
+                            <span class="text-slate-500 line-through mb-1">$${product.oldPrice}</span>
+                        </div>
+                        <button onclick="openModal('${product.name}', ${product.price})" class="w-full ${product.isSpecial ? 'bg-white text-blue-900 hover:bg-blue-50 shadow-white/10' : 'bg-blue-600 hover:bg-blue-700 text-white shadow-blue-500/20'} font-bold py-3 rounded-xl transition shadow-lg">
+                            ${product.isSpecial ? 'Get Full Access' : 'Buy Now'}
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize Products
+        renderProducts();
+
+        // --- Checkout Modal Logic ---
+        const modal = document.getElementById('checkoutModal');
+        const productNameEl = document.getElementById('modal-product-name');
+        const priceEl = document.getElementById('modal-price');
+
+        function openModal(productName, price) {
+            productNameEl.textContent = productName;
+            priceEl.textContent = '$' + price;
+            modal.classList.remove('hidden');
+            // Reset to PayPal tab by default
+            switchTab('paypal');
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+
+        function switchTab(tab) {
+            const paypalBtn = document.getElementById('tab-paypal');
+            const cryptoBtn = document.getElementById('tab-crypto');
+            const paypalContent = document.getElementById('content-paypal');
+            const cryptoContent = document.getElementById('content-crypto');
+
+            if (tab === 'paypal') {
+                paypalBtn.classList.replace('bg-slate-700', 'bg-blue-600');
+                paypalBtn.classList.replace('text-slate-300', 'text-white');
+                cryptoBtn.classList.replace('bg-blue-600', 'bg-slate-700');
+                cryptoBtn.classList.replace('text-white', 'text-slate-300');
+                
+                paypalContent.classList.remove('hidden');
+                cryptoContent.classList.add('hidden');
+            } else {
+                cryptoBtn.classList.replace('bg-slate-700', 'bg-blue-600');
+                cryptoBtn.classList.replace('text-slate-300', 'text-white');
+                paypalBtn.classList.replace('bg-blue-600', 'bg-slate-700');
+                paypalBtn.classList.replace('text-white', 'text-slate-300');
+                
+                cryptoContent.classList.remove('hidden');
+                paypalContent.classList.add('hidden');
+            }
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            if (event.target == modal.querySelector('.fixed.inset-0.bg-slate-900\\/90')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
